@@ -1,16 +1,5 @@
-import {
-  Controller,
-  Delete,
-  Get,
-  Param,
-  ParseIntPipe,
-  Patch,
-  Post,
-  Put,
-  UseInterceptors,
-} from '@nestjs/common';
+import { Controller, Get, Post, UseInterceptors } from '@nestjs/common';
 import { CatsService } from './cats.service';
-import { PositiveIntPipe } from 'src/common/pipes/positiveInt.pipe';
 import { SuccessInterceptor } from 'src/common/interceptors/success.interceptor';
 
 @Controller('cats')
@@ -19,34 +8,27 @@ export class CatsController {
   constructor(private readonly catsService: CatsService) {}
 
   @Get()
-  findAll() {
-    console.log('find all');
-    return { cats: 'all cats' };
+  getCurrentCat() {
+    return 'current cat';
   }
 
-  @Get(':id')
-  findById(@Param('id', ParseIntPipe, PositiveIntPipe) id: number) {
-    console.log(`id: ${id}`);
-    return 'a cat';
+  @Post('signup')
+  async signup() {
+    return 'signup';
   }
 
-  @Post()
-  create() {
-    return 'create a new cat';
+  @Post('signin')
+  async signin() {
+    return 'signin';
   }
 
-  @Put(':id')
-  update() {
-    return 'update a cat';
+  @Post('signout')
+  async signout() {
+    return 'signout';
   }
 
-  @Patch(':id')
-  updateAttr() {
-    return 'update attributes of a cat ';
-  }
-
-  @Delete(':id')
-  delete() {
-    return 'delete a cat';
+  @Post('upload/cats')
+  async uploadCatImg() {
+    return 'upload a cat image';
   }
 }
